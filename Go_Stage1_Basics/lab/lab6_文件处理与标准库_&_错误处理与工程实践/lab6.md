@@ -15,28 +15,23 @@
 
 1. **创建项目目录**：
 
-   Bash
-
-   ```
+   ```go
    mkdir log-analyzer
    cd log-analyzer
    ```
 
 2. **初始化 Go Module**：
 
-   Bash
 
-   ```
-   go mod init github.com/yourname/log-analyzer
+   ```go
+go mod init github.com/yourname/log-analyzer
    ```
 
    *(这里的 `yourname` 可以随便写，比如 `juvin`)*
 
 3. **创建目录结构**： 请手动创建以下文件夹和文件：
 
-   Plaintext
-
-   ```
+   ```go
    log-analyzer/
    ├── go.mod        <-- 依赖管理文件 (自动生成)
    ├── main.go       <-- 入口文件
@@ -56,7 +51,6 @@
 
 在 `data/server.log` 中手动填入（或复制）以下模拟的脏数据。注意里面有正常的日志，也有错误的格式，还有我们要提取的 IP 和 错误码。
 
-Plaintext
 
 ```
 2024-02-14 10:00:01 [INFO] User login success from IP: 192.168.1.10
@@ -98,14 +92,13 @@ This is a garbage line with no format.
 
 2. **定义结构体**：
 
-   Go
 
-   ```
-   type LogEntry struct {
-       Level string // INFO, ERROR, WARN
-       IP    string
-       Msg   string
-   }
+   ```go
+type LogEntry struct {
+    Level string // INFO, ERROR, WARN
+    IP    string
+    Msg   string
+}
    ```
 
 3. **编写函数 `ParseLog(line string) (\*LogEntry, error)`**：
@@ -127,14 +120,13 @@ This is a garbage line with no format.
 
 1. **Import 包**：
 
-   Go
 
-   ```
-   import (
-       "fmt"
-       "github.com/yourname/log-analyzer/pkg/fileop"   // 引入你写的包
-       "github.com/yourname/log-analyzer/pkg/analyzer"
-   )
+   ```go
+import (
+    "fmt"
+    "github.com/yourname/log-analyzer/pkg/fileop"   // 引入你写的包
+    "github.com/yourname/log-analyzer/pkg/analyzer"
+)
    ```
 
 2. **流程逻辑**：
