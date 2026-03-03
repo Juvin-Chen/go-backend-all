@@ -4,3 +4,20 @@ This is a garbage line with no format.
 2024-02-14 10:01:20 [WARN] High memory usage detected. IP: 127.0.0.1
 2024-02-14 10:02:00 [ERROR] Timeout waiting for service. ErrorCode: 504, IP: 192.168.1.20
 2024-02-14 10:03:45 [INFO] Logout success.
+
+2024-02-14 10:08:20 [ERROR] Permission denied! ErrorCode: 403, IP: 192.168.4.50
+2024-02-14 10:09:45 [WARN] Slow query detected (1.2s). IP: 127.0.0.1
+Random text without any log structure
+2024-02-14 10:10:10 [INFO] Service restarted. IP: 172.17.0.15
+2024-02-14 10:11:30 [ERROR] Connection reset by peer. ErrorCode: 502, IP: 192.168.5.60
+2024-02-14 10:12:00 [WARN] Too many open files. IP: 10.20.30.40
+2024-02-14 10:13:15 [INFO] Backup completed. IP: 192.168.6.70
+[ERROR] Missing timestamp! IP: 192.168.7.80
+2024-02-14 10:14:40 [ERROR] Out of memory! ErrorCode: 507, IP: 172.18.0.20
+2024-02-14 10:15:00 [WARN] Invalid user input detected. IP: 127.0.0.1
+2024-02-14 10:16:25 [INFO] New user registered. IP: 192.168.8.90
+2024-02-14 10:17:50 [ERROR] Timeout connecting to Redis. ErrorCode: 504, IP: 10.30.40.50
+Log line with IP but no level: 2024-02-14 10:18:00 IP: 192.168.9.100
+2024-02-14 10:19:10 [WARN] SSL certificate expiring in 7 days. IP: 172.19.0.25
+2024-02-14 10:20:30 [INFO] File uploaded successfully. IP: 192.168.10.10
+2024-02-14 10:21:00 [ERROR] Invalid JSON payload. ErrorCode: 400, IP: 10.40.50.60

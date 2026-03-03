@@ -173,4 +173,4 @@ type Gateway[T any] struct{}
 
 ------
 
-> 个人 lab4 的 Project 设计
+> lab4 的 Project 设计
