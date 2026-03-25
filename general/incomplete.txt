@@ -1,4 +1,3 @@
-需要补充的内容
-package包下的 
-Log Err() 经常用到且需要打印错误 
-URL time panic errors
+需要补充的内容 
+URL panic errors 
+html/template
