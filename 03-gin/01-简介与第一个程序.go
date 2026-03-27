@@ -114,11 +114,19 @@ func test1_More() {
 func test1_Path() {
 	r := gin.Default()
 	// 路径参数 :name
-	r.GET("/user/name", func(ctx *gin.Context) {
+	/*
+		标准库的路由 只能匹配完全固定的路径，不支持任何动态参数！
+		你写 /user，就只能匹配 /user
+		你写 /user/name，就只能匹配 /user/name
+		它根本不认识 /user/任意内容 这种可变路径
+	*/
+	r.GET("/user/:name", func(ctx *gin.Context) {
 		name := ctx.Param("name")
 		ctx.String(http.StatusOK, "Hello %s", name)
 	})
 	// 查询参数
+	// 查询参数 /search?q=xxx
+	// 作用：URL 问号 ? 后面的参数（最常用的传参方式）
 	r.GET("/search", func(ctx *gin.Context) {
 		query := ctx.DefaultQuery("q", "default")
 		ctx.String(http.StatusOK, "Search: %s", query)

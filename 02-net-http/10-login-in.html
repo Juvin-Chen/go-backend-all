@@ -10,7 +10,7 @@
     {{if .Error}}
     <p style="color:red">{{.Error}}</p>
     {{end}}
-    <form action="/login" method="POST">
+    <form action="/login/submit" method="POST">
         <div>
             <label>用户名：</label>
             <input type="text" name="username" value="{{.Username}}">
