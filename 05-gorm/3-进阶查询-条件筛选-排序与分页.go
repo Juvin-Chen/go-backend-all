@@ -25,7 +25,9 @@ func test3_Select_main3() {
 		log.Fatalf("连接数据库失败: %v", err)
 	}
 	db.AutoMigrate(&Umbrella{})
+
 	// 清空 umbrellas 表（重置自增ID，删除所有数据）
+	// 这个函数是让数据库直接执行你的原生 sql 语句
 	db.Exec("TRUNCATE TABLE umbrellas")
 
 	// 0. 准备测试数据：一次性批量插入 5 把不同状态和位置的伞
@@ -50,7 +52,7 @@ func test3_Select_main3() {
 	// 2.排序
 	fmt.Println("2.排序")
 	var sortedUmbrellas []Umbrella
-	// // desc 是降序，asc 是升序
+	// desc 是降序，asc 是升序
 	db.Order("id desc").Find(&sortedUmbrellas)
 	fmt.Printf("最新放入系统的伞是: 编号[%s]\n", sortedUmbrellas[0].SerialNumber)
 

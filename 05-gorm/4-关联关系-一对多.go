@@ -10,6 +10,18 @@
 
 	一个学生（User）可以借多次伞，产生多条借阅记录（BorrowRecord）。
 	我们要实现：只要查出这个学生，就能用一行代码，顺藤摸瓜把他名下的所有借阅记录全带出来。
+
+这里一对多关系的本质：
+
+	用你的借伞场景说：
+		1 个学生 → 可以借 N 把伞 → 产生 N 条借伞记录
+		一：学生（1 个人）
+		多：借伞记录（多条）
+	生活例子：
+		1 个班级 → 多个学生
+		1 个学生 → 多条借伞记录
+
+这就是一对多
 */
 package main
 
@@ -26,6 +38,8 @@ type Student struct {
 	gorm.Model // 包含了ID
 	Name       string
 	// 【核心魔法】：定义一个切片，告诉 GORM 这个学生有多条借阅记录 (一对多)
+	// 这个切片是一个代码收纳盒，并不存在于数据库里面的学生表当中
+	// 规则：切片 = 我有多个借伞记录，一对多关系中的一
 	Records []BorrowRecord
 }
 
@@ -33,17 +47,19 @@ type Student struct {
 type BorrowRecord struct {
 	gorm.Model
 	// 【外键 (Foreign Key)】：GORM 默认会把 "模型名+ID" (StudentID) 当作外键，用来和 Student 表关联
+	// 规则：结构体名+ID = 外键！我属于哪个学生
 	StudentID  int
 	UmbrellaSN string // 借的哪把伞 (存伞的编号)
 	Status     string // 状态: "borrowing" (借出中), "returned" (已还)
 }
 
 func test4_main() {
-	dsn := "root:123456@tcp(127.0.0.1:3306)/test_gorm_db?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:root@tcp(127.0.0.1:3306)/test_gorm_db?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("连接失败: %v", err)
 	}
+
 	// 自动建表：这次建两张表，GORM 会自动在 BorrowRecords 表里加上 student_id 字段
 	db.AutoMigrate(&Student{}, &BorrowRecord{})
 	fmt.Println("--- 两张关联表创建完毕 ---")
