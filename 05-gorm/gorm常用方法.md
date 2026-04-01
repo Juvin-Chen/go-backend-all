@@ -1,4 +1,4 @@
-# GORM 核心常用方法大全
+# GORM 核心常用方法
 基于**学生(Student) + 借阅记录(BorrowRecord)** 场景编写
 覆盖：**基础操作、条件查询、关联查询、原生SQL** 所有高频 `db.()` 方法
 
@@ -13,6 +13,7 @@ type Student struct {
 	gorm.Model
 	Name    string
 	Records []BorrowRecord // 一对多：收纳盒（假字段）
+    // 基本数据类型定义的一般就是真字段，结构体 / 切片 一般是假字段 
 }
 
 // 借阅记录表（多方）
@@ -63,6 +64,7 @@ db.Create(&student) // GORM自动保存两张表数据
 ```go
 var student Student
 db.First(&student, 1) // 查询ID=1的学生
+// First(x,x) 这种写法第二个参数默认是按主键 
 ```
 
 ### 2. `db.Take()` 查询单条数据（无排序）
@@ -77,6 +79,7 @@ db.Take(&student)
 ```go
 var students []Student
 db.Find(&students) // 查询所有学生
+// 可对应看下面有关的条件查询 
 ```
 
 ---
@@ -183,7 +186,7 @@ db.Preload("Records").Where("name = ?", "zhangsan").First(&student)
 fmt.Println(student.Records) // 输出该学生所有借伞记录
 ```
 
-### ✅ 关键说明
+### 关键说明
 - 不加 `Preload`：`student.Records` 是空的
 - 加 `Preload`：GORM自动查询关联表，把数据装进切片
 
